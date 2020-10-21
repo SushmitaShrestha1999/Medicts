@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@inject SignInManager<IdentityUser> _loginManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Medict</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Datatables/datatables.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Home">MedShop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Index" asp-controller="Product">Product <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Category">Category</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Index" asp-controller="Brand">Brand</a>
+                    </li>
+
+
+                    @if (_loginManager.IsSignedIn(User))
+                    {
+                <li class="nav-item">
+                    <form class="form-inline" asp-area="Identity" asp-action="Logout" asp-controller="Authentication" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" style="width:auto" class="nav-link btn btn-link py-0">
+                            Logout @User.Identity.Name
+                        </button>
+                    </form>
+                </li>}
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="ListUsers" asp-controller="Authentication">List of Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </li>
+
+                </ul>
+
+
+
+
+
+                
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy;@DateTime.Now.Year - Medict - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/Datatables/datatables.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

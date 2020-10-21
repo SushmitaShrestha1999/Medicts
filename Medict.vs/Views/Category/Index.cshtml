@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Medict.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h4>List of Category</h4>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr  scope="col">
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-default">
+                <td  scope="row" >
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td  scope="row" >
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td  scope="row" >
+                    <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
+                    
+                    <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

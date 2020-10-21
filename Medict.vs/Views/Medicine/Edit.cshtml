@@ -1,0 +1,84 @@
+﻿@model Medict.Models.Medicine
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Edit</h4>
+<hr />
+<hr />
+
+<form asp-action="Create" enctype="multipart/form-data" asp-controller="Home">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Name">Name</label>
+            <input type="text" class="form-control" id="Name" placeholder="Enter Product Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <hr />
+        <hr />
+        <div class="form-group col-md-6">
+            <label asp-for="CompanyName">Manufactured By</label>
+            <input type="text" class="form-control" id="Name" placeholder="Enter Company Name">
+            <span asp-validation-for="CompanyName" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="CategoryId">Category</label>
+            <select class="form-control mr-sm-2" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.CategoryList,"CategoryId","Name"))">
+            </select>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group col-md-6">
+            <label asp-for="BrandId">Brand </label>
+            <select class="form-control mr-sm-2" asp-for="BrandId" asp-items="@(new SelectList(ViewBag.BrandList,"BrandId","Name"))">
+            </select>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-fo="Quantity">Quantity</label>
+            <input type="text" class="form-control" id="Quantity">
+        </div>
+
+        <div class="form-group  col-md-6">
+            <label asp-for="Price">Price</label>
+            <input type="text" class="form-control" id="Price">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="Email"> Email</label>
+            <input type="text" class="form-control" id="Email">
+        </div>
+
+
+
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label asp-for="Description"> Short Description</label>
+            <textarea type="text" class="form-control" id="ShotrtDescription" placeholder="Write short description about this medicine"></textarea>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    document.ready(function () {
+        $('.custom-file-input').on("change", function () {
+            var filename = $(this).val().split("\\").pop();
+            $(this).next('.custom-file-label').html(filename);
+        });
+    });
+</script>
+
+

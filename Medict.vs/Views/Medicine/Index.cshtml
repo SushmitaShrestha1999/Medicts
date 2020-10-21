@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Medict.Models.Medicine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>List of Medicines</h4>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr scope="col">
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th scope="col">
+
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th scope="col">
+
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th scope="col">
+
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.BrandId)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th scope="col">
+
+                @Html.DisplayNameFor(model => model.Dateofmanufactured)
+            </th>
+            <td scope="col">
+                @Html.DisplayNameFor(model => model.ExpiryDate)
+            </td>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr class="table-light">
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.BrandId)
+            </td>
+
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Dateofmanufactured)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.ExpiryDate)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td scope="row">
+                <a asp-action="Edit" asp-route-id="@item.MedicineId">Edit</a> 
+
+                <a asp-action="Delete" asp-route-id="@item.MedicineId">Delete</a>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

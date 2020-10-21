@@ -1,0 +1,129 @@
+﻿@model Medict.Viewmodels.ShoppingCartViewModel
+@*@{ decimal su = 0;
+    int SN = 1;
+    decimal rowTotal = 0; }*@
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<style type="text/css">
+    .label {
+        font-size: 10pt;
+        font-weight: bold;
+        font-family: Arial;
+    }
+
+    .contents {
+        border: 1px dotted black;
+        padding: 5px;
+        width: 300px;
+    }
+
+    .name {
+        color: #18B5F0;
+    }
+
+    .left {
+        float: left;
+        width: 50px;
+        height: 50px;
+    }
+
+    .right {
+        margin-left: 60px;
+        line-height: 50px;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    #footer {
+        position: fixed;
+        bottom: 0px;
+        height: 3px;
+        background-color: #666;
+        color: #eee;
+        width: 100%
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#btnPrint").click(function () {
+            var contents = $("#dvContents").html();
+            var frame1 = $('<iframe />');
+            frame1[0].name = "frame1";
+            frame1.css({ "position": "absolute", "top": "-1000000px" });
+            $("body").append(frame1);
+            var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+            frameDoc.document.open();
+            //Create a new HTML document.
+            frameDoc.document.write('<html><head><title>DIV Contents</title>');
+            frameDoc.document.write('</head><body>');
+            //Append the external CSS file.
+            frameDoc.document.write('<link href="style.css" rel="stylesheet" type="text/css" />');
+            //Append the DIV contents.
+            frameDoc.document.write(contents);
+            frameDoc.document.write('</body></html>');
+            frameDoc.document.close();
+            setTimeout(function () {
+                window.frames["frame1"].focus();
+                window.frames["frame1"].print();
+                frame1.remove();
+            }, 500);
+        });
+    });</script>
+
+<div id="dvContents">
+
+    <table class="table table-hover" width:100%">
+
+        <thead>
+            <tr>
+
+                <th>Selected Amount</th>
+                <th>Product Name</th>
+
+
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.ShoppingCart.ShoppingCartItems)
+            {
+            <tr>
+
+                
+
+                <td class="text-center">@x.Amount</td>
+                <td class="text-center">@x.Product.Name</td>
+                <td class="text-center">@x.Product.Price.ToString("c")</td>
+                <td class="text-center">@((x.Amount * x.Product.Price).ToString("c"))</td>
+                <td class="text-center"><a class="glyphicon glyphicon-remove text-danger" asp-controller="ShoppingCart">  @x.Amount</a> </td>
+
+            </tr>            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total</td>
+                <td class="text-right">@Model.ShoppingCartTotal.ToString("c")</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <div class="btn-group">
+            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
+            <a class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"> Add More Medicines</span>
+                </a>
+
+            </a>
+
+
+        </div>
+    </div>
+</div>

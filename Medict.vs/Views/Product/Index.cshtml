@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Medict.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>List of Products</h4>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr scope="col">
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th  scope="col" >
+            
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th  scope="col">
+                @Html.DisplayNameFor(model => model.BrandId)
+            </th>
+            <th  scope="col">
+                @Html.DisplayNameFor(model => model.ShotrtDescription)
+            </th>
+            <th  scope="col">
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th  scope="col">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+          
+            <th  scope="col">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th  scope="col">
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th  scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+@foreach (var item in Model) {
+        <tr class="table-light">
+            <td scope="row">
+                @*<img src="@Url.Content(item.Image)" style="width:500px;height:450px;">*@
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.ShotrtDescription)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.LongDescription)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+        
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td scope="row">
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td scope="row">
+                <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                
+                <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Medict.Models.Product>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_ClientLayout";
+}
+
+
+
+
+    @*<div class="container">
+            <img src="img_avatar.png" alt="Avatar" class="image">
+            <div class="overlay">
+                <div class="text">Hello World</div>
+            </div>
+        </div>*@
+
+
+
+
+
+<form asp-action="List" asp-controller="Home">
+    <div class="new_arrivals_agile_w3ls_info">
+        <div class="container">
+            <h3 class="wthree_text_info">New <span>Medicines</span></h3>
+            <div id="horizontalTab">
+                <div class="row product-container">
+                    @foreach (var item in Model)
+                    {
+
+                        @*<div class="col-md-3 col-sm-6">
+                                <div class="product-grid2">
+                                    <div class="product-image2">
+                                        <img class="img-responsive" title="Click to View Product detail"
+                                             style="cursor:pointer;height:160px;width:100%"
+                                             src="@Url.Content(item.Image)">
+                                        <ul class="social">
+                                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="#" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                        <a class="add-to-cart" href="">Add to cart</a>
+                                    </div>
+                                    <div class="product-content">
+                                        <h5>@item.Name</h5>
+                                        <p>@item.Price Rs.</p>
+                                    </div>
+                                </div>
+                            </div>*@
+
+
+
+
+                        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+                            <div class="thumbnail product-item" style="height:300px">
+                                <span class="product-new-top">New</span>
+                                <img class="img-responsive" title="Click to View Product detail"
+                                     style="cursor:pointer;height:160px;width:100%"
+                                     src="@Url.Content(item.Image)">
+                                
+                                <div class="caption">
+                                    <h5>@item.Name</h5>
+                                    <p>@item.Price Rs.</p>
+                                    @*<div class="container">
+                                        <input type="button" onclick="decrementValue()" value="-" />
+                                        <input type="text" name="Quantity" value="1" maxlength="2" max="50" size="1" id="number" />
+                                        <input type="button" onclick="incrementValue()" value="+" />
+                                    </div>*@
+                                    <hr />
+
+                                    <div>
+                                        <button  type="submit" name="submit">@*<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>*@ Quick View</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    function incrementValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        if (value < 10) {
+            value++;
+            document.getElementById('number').value = value;
+        }
+    }
+    function decrementValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        if (value > 1) {
+            value--;
+            document.getElementById('number').value = value;
+        }
+
+    }
+</script>
